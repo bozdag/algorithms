@@ -1,19 +1,33 @@
 package brackets
 
-const openingBrace = '('
-const closingBrace = ')'
+func isOpeningBrace(ch byte) bool {
+    return ch == '{' || ch == '[' || ch == '('
+}
 
-// IsBalanced checks if given string is balanced in open and closed brackets
-func IsBalanced(str string) bool{
-	stack := []byte{}
+func isClosingBrace(ch byte) bool {
+    return ch == '}' || ch == ']' || ch == ')'
+}
+
+func getClosingPair(ch byte) byte {
+    switch ch {
+        case '{': return '}'
+        case '[': return ']'
+        case '(': return ')'
+    }    
+    return ' '
+}
+
+// Complete the isBalanced function below.
+func IsBalanced(str string) bool {
+    stack := []byte{}
 	for _, s:= range str {
-		if s == openingBrace {
+        if isOpeningBrace(byte(s)) {
 			stack = append(stack, byte(s) )
-		} else if s == closingBrace {
+        } else if isClosingBrace(byte(s)) {
 			if len(stack) > 0 {
 				p := stack[len(stack)-1]
 				stack = stack[:len(stack)-1]
-				if p != openingBrace {
+                if !isOpeningBrace(byte(p)) || byte(s) != getClosingPair(p) {
 					return false
 				}
 			} else {
@@ -26,4 +40,5 @@ func IsBalanced(str string) bool{
 		return false
 	}
 	return true
+
 }
