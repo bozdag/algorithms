@@ -10,12 +10,18 @@ func TestIsBalanced_Balanced(t *testing.T) {
 		")(())",
 		"((",
 		"(())(())()",
+		"{[()]}",
+		"{[(])}",
+		"{{[[(())]]}}",
 	}
 
 	expectedResults := []bool {
 		true,
 		false,
 		false,
+		false,
+		true,
+		true,
 		false,
 		true,
 	}
@@ -26,3 +32,5 @@ func TestIsBalanced_Balanced(t *testing.T) {
 		} 
 	}
 }
+
+
